@@ -1,4 +1,4 @@
 require 'config/boot'
 require 'config/environment'
 
-every(3.minutes, 'marketpoint.fetch') { Delayed::Job.enqueue FeedFetcherJob.new }
+every(60.minutes, 'feed_fetcher.fetch') { Delayed::Job.enqueue FeedFetcherJob.new }
