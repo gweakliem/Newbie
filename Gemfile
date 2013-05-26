@@ -7,9 +7,15 @@ gem 'rails', '3.2.13'
 
 
 gem 'bcrypt-ruby', :require => 'bcrypt'
+gem 'delayed_job', '3.0.0'
+gem 'delayed_job_active_record'
+gem 'rest-client', '1.5.1', :require => 'restclient'
+gem 'json_pure', '1.4.3', :require => 'json'
+gem 'clockwork', '0.2.0'
 
 group :development, :test do
 	gem 'sqlite3', '1.3.5'
+	gem 'capybara', '1.1.2'
 	gem 'rspec-rails', '2.11.0'
 end
 
@@ -28,7 +34,7 @@ end
 gem 'jquery-rails'
 
 group :production do
-  gem 'pg', '0.12.2'
+  gem 'pg', '0.14.0'
 end
 
 # To use ActiveModel has_secure_password
