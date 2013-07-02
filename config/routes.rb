@@ -56,6 +56,8 @@ NewbieRails::Application.routes.draw do
   match "/login", to: "sessions#new"
   match "/logout", to: "sessions#destroy"
   match "/signup", to: "users#new"
+  match "/import", to: "subscriptionImport#import"
+
   root :to => "users#new"
   resources :users
   resources :sessions
