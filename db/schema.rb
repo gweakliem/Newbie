@@ -11,12 +11,12 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130526052154) do
+ActiveRecord::Schema.define(:version => 20130805133627) do
 
   create_table "delayed_jobs", :force => true do |t|
-    t.integer  "priority",   :default => 0
-    t.integer  "attempts",   :default => 0
-    t.text     "handler"
+    t.integer  "priority",   :default => 0, :null => false
+    t.integer  "attempts",   :default => 0, :null => false
+    t.text     "handler",                   :null => false
     t.text     "last_error"
     t.datetime "run_at"
     t.datetime "locked_at"
@@ -40,6 +40,8 @@ ActiveRecord::Schema.define(:version => 20130526052154) do
     t.datetime "updated_at",   :null => false
   end
 
+  add_index "feeds", ["xmlUrl"], :name => "index_feeds_on_xmlUrl", :unique => true
+
   create_table "posts", :force => true do |t|
     t.string   "title"
     t.string   "link"
@@ -57,6 +59,8 @@ ActiveRecord::Schema.define(:version => 20130526052154) do
     t.integer  "user_id"
     t.integer  "feed_id"
   end
+
+  add_index "subscriptions", ["feed_id", "user_id"], :name => "index_subscriptions_on_feed_id_and_user_id", :unique => true
 
   create_table "users", :force => true do |t|
     t.string   "email"

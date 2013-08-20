@@ -4,8 +4,8 @@
 <table>
   <tr>
     <th>Title</th>
-    <th></th>
-    <th></th>
+    <th>Feed Id</th>
+    <th>XmlUrl</th>
     <th></th>
   </tr>
 
@@ -14,9 +14,8 @@
     <td><%= subscription.title %></td>
      <td><%= subscription.feed_id %></td>
      <td><%= subscription.xmlUrl %></td>
-    <td><%= link_to 'Show', subscription %></td>
-    <td><%= link_to 'Edit', edit_subscription_path(subscription) %></td>
-    <td><%= link_to 'Destroy', subscription, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+    <td><%= link_to 'Show', subscription %> <%= link_to 'Edit', edit_subscription_path(subscription) %>
+      <%= link_to 'Destroy', subscription, method: :delete, data: { confirm: 'Are you sure?' } %></td>
   </tr>
 <% end %>
 </table>

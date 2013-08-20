@@ -6,12 +6,14 @@ gem 'rails', '3.2.13'
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
 
-gem 'bcrypt-ruby', :require => 'bcrypt'
+gem 'bcrypt-ruby', '~> 3.0.0', :require => 'bcrypt'
 gem 'delayed_job', '3.0.0'
-gem 'delayed_job_active_record'
+gem 'delayed_job_active_record', '0.3.3'  #'0.4.3'
 gem 'rest-client', '1.5.1', :require => 'restclient'
 gem 'json_pure', '1.4.3', :require => 'json'
-gem 'clockwork', '0.2.0'
+gem 'clockwork', '0.5.0' #'0.2.0'
+gem 'feedzirra', '0.2.0.rc2'
+gem 'daemons'
 
 group :development, :test do
 	gem 'sqlite3', '1.3.5'
@@ -39,7 +41,7 @@ group :production do
 end
 
 # To use ActiveModel has_secure_password
-# gem 'bcrypt-ruby', '~> 3.0.0'
+#gem 'bcrypt-ruby', '~> 3.0.0'
 
 # To use Jbuilder templates for JSON
 # gem 'jbuilder'

@@ -2,7 +2,7 @@ class SubscriptionsController < ApplicationController
   # GET /subscriptions
   # GET /subscriptions.json
   def index
-    @subscriptions = Subscription.all
+    @subscriptions = Subscription.find_all_by_user_id(session[:user_id])
 
     respond_to do |format|
       format.html # index.html.erb
@@ -43,10 +43,17 @@ class SubscriptionsController < ApplicationController
     logger.debug "Create subscription params #{@params} session #{@session}"
     existing_feed = Feed.find_by_xmlUrl(params[:subscription][:xmlUrl])
     if (existing_feed == nil)
-      existing_feed=Feed.new(xmlUrl: params[:subscription][:xmlUrl])
+      logger.debug "Feed not found"
+      feed = Feedzirra::Feed.fetch_and_parse(params[:subscription][:xmlUrl])
+      logger.debug "fetched feed #{feed}"
+      #feed.last_modified  # => Sat Jan 31 17:58:16 -0500 2009 # it's a Time object
+      existing_feed=Feed.new(xmlUrl: feed.xmlUrl,
+        description: feed.title, etag: feed.etag, htmlUrl: feed.url, lastRetrieve: nil, title: feed.title)
       existing_feed.save
     end
-    @subscription = Subscription.new(title: params[:subscription][:title])
+    logger.debug "Adding subscription to feed #{existing_feed.id} for user #{@session}"
+    title = params[:subscription][:title] || feed.title
+    @subscription = Subscription.new(title: title)
     @subscription.user_id = session[:user_id]
     @subscription.feed_id = existing_feed.id
 
