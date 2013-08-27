@@ -47,7 +47,7 @@ class SubscriptionsController < ApplicationController
       feed = Feedzirra::Feed.fetch_and_parse(params[:subscription][:xmlUrl])
       logger.debug "fetched feed #{feed}"
       #feed.last_modified  # => Sat Jan 31 17:58:16 -0500 2009 # it's a Time object
-      existing_feed=Feed.new(xmlUrl: feed.xmlUrl,
+      existing_feed = Feed.new(xmlUrl: feed.xmlUrl,
         description: feed.title, etag: feed.etag, htmlUrl: feed.url, lastRetrieve: nil, title: feed.title)
       existing_feed.save
     end
